@@ -1,0 +1,109 @@
+2021-02-14 -- CSE213 Scratchpad for sec-2
+==========================================
+
+You need to be confident in dealing with functions.
+
+Q: type
+1, if you are very much confident in dealing with function
+2, if you are very moderately confident in dealing with function
+3, if you are need a review on function
+
+According to your feedback you used struct in CSE203
+
+Q: What can be the member of a struct?
+	- member data: int, string, pointer, self-referencial-pointer
+	Q: did you use any member function in your struct?
+	Your answer: NO. You used global function only, and your struct variables were passed as 
+			parameters to those global functions.
+
+	- struct & class also can have member functions.
+	
+----------------------------------------------------------------------------------------------------
+Q: What do you mean by:
+	- function call
+	- function definition
+	- function prototype
+
+void doSome();
+
+//doSome(); //invalid, error
+
+void doSome(){
+	//
+	//
+}
+
+
+
+
+
+int main(){
+	//
+	//
+	//
+	doSome();
+	//
+	return 0;
+}
+
+Q: Can you tell the rerutn type by looking at function call?
+
+
+
+Q: When can you be 100% sure that the return type is non-void?
+	- if there is LHS of the call
+		z = doSome(10,20,30);
+		cout<<doAnother("ONE", "TWO");
+
+	- if the call itself is a nested-call as a parameter of outer call
+	
+	void doSome(int p, int q, int r){
+		//
+		return ...;
+	}
+
+	int main(){
+		string str1="...", str2;
+		getline(cin,str2);
+		doSome(10, doAnother(str1, str2), 20);	
+		return 0;
+	}		
+	//here we can be sure that doAnother must retuen non-void.
+	//And we expect doAnother to retuen an int, but we can't gurantee that
+	//compiler will not object anything as long as the return tupe is compatible with int
+	//int, float, double, long, short
+	//compiler will give error, if return type is not castable to int such as string	===========================================================================================
+
+
+Actual parameter: What we actually send as parameter while calling the function
+Formal parameter: the parameter we use in function definition
+
+how we can send parameters to a function:
+	- calling a function by passing value of actual parameter [pass-by-value]
+	- calling a function by passing reference of actual parameter [pass-by-reference]
+	- calling a function by passing address of actual parameter [pass-by-address]
+
+void doSome(int p, int q){...}
+
+void doSome(int& p, int q){...}
+
+int main(){
+	int x=10, y; cin>>y;
+	doSome(x, 20);
+	string str; cin>>str;
+	doAnother(str);
+	doAnother("Hello World");
+	return 0;
+}
+
+Q: When should we use pass-by-value and when to use pass-by-reference?
+	- when caller function wants the called function to use the value of actual parameter only,
+		we should use pass-by-value. (read only)
+	- when caller function wants the called function to update actual parameter,
+		we should use pass-by-reference. (write/read)
+
+
+
+
+
+
