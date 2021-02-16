@@ -1,0 +1,260 @@
+2021-02-16 -- CSE213 Scratchpad for sec-2
+==========================================
+
+Actual parameter: What we actually send as parameter while calling the function
+Formal parameter: the parameter we use in function definition
+
+how we can send parameters to a function:
+	- calling a function by passing value of actual parameter [pass-by-value]
+	- calling a function by passing reference of actual parameter [pass-by-reference]
+	- calling a function by passing address of actual parameter [pass-by-address]
+
+PASS-BY-VALUE:
+void doSome(int p, int q){
+	//
+	//
+}
+int main(){
+	int x=10;
+	doSome(x, 20);	
+	return 0;
+}
+-------
+PASS-BY-REFERENCE:
+void doSome(int& p, int q){
+	//
+	//
+}
+int main(){
+	int x=10, y; cin>>y;
+	doSome(x, 20);	
+	return 0;
+}
+---------
+PASS-BY-ADDRESS:
+void doSome(int *ptr, int q){
+	//
+	//
+}
+int main(){
+	int x=10, y; cin>>y;
+	doSome(&x, 20);	
+	return 0;
+}
+
+char ch = 'A';		//1 byte	: byte no 110
+int x = 10;		//4 bytes	: bytes 120-123
+float f = 12.3;		//8 bytes	: bytes 230-237
+
+char *charPtr = &ch; 	//?? bytes needed to store the address of ch	//content of charPtr: 110
+int *intPtr = &x; 	//?? bytes needed to store the address of x	//content of intPtr: 120
+float *floatPtr = &f; 	//?? bytes needed to store the address of f	//content of floatPtr:230
+
+
+Range = base^noOfDigits
+
+Decimal no system: base 10
+10 plots: you need 1 digit [0,1,2,...9]		10^1 = 10
+100 plots: you need 2 digits [00,...99]		10^2 = 100
+1000 plots: you need 3 digits [000,...999]	10^3 = 1000
+
+Binary no system: base 2
+bit (binary digit)
+1 bit:	range{0,1} --> 2			2^1 = 2
+2 bits:	range{00,01,10,11} --> 4		2^2 = 4
+8 bits:						2^8 = 256
+10 bits:					2^10 = 1024	[kilo, thousand+]
+20 bits:					2^20 = 1024 * 1024	[mega, million+]
+30 bits:					2^30 = 1024 * 1024 * 1024	[giga, billion+]
+
+32 bits: 2^32 = 1024 * 1024 * 1024 * 4	[4 giga]
+smallest byte no: 00000000 00000000 00000000 00000000
+largest byte no: 11111111 11111111 11111111 11111111
+
+32 bit address bus can support maximum 4 GB RAM
+
+if your computer supports more than 4GB RAM, then your address bus is 64-bit.
+Therefore each byte no will be represnted by 8 bytes.
+
+a pointer will occupy 4 bytes to represent an address, 
+	- if your address bus is 32 bit
+	- OR your address bus is 64 bit, but you installed 32-bit OS
+a pointer will occupy 8 bytes to represent an address, 
+	- if your address bus is 64 bit, and your installed OS is also 64 bit
+========================================================================================
+
+Struct/class
+
+For struct/class:
+	- struct/class variables are called as object
+	- member data: field
+	- member function: method
+
+class Date{
+	int dd, mm, yyyy;
+
+};
+
+class Document{
+	//fields...
+	void setDocument(){...}
+};
+
+struct Student{
+	int id;
+	string name;
+	//string dob;	//"12-12-2000"
+	Date dob;
+	string grades[40];
+	int credits[40];
+	float cgpa;
+
+	float calcAndReturnCgpa(){
+		float totalGradePoint =0.0;
+		int totalCredits = 0;
+		for(...){
+			if(grades[i]=="A") totalGradePoint += 4.0* credits[i];
+			else if(grades[i]=="A-") totalGradePoint += 3.7.0* credits[i];
+			....
+			//end of if
+			totalCredits += credits[i];
+		}
+		cgpa = totalGradePoint / totalCredits;
+		return cgpa;
+	}
+
+	void setInfo(){
+		//cin>>....
+	}
+	void solveAndUploadAssignment(Document a){
+		//...
+	}
+};
+
+float getCgpa(Student& s ){
+	float totalGradePoint =0.0;
+	int totalCredits = 0;
+	for(...){
+		if(s.grades[i]=="A") totalGradePoint += 4.0* s.credits[i];
+		else if(s.grades[i]=="A-") totalGradePoint += 3.7.0* s.credits[i];
+		....
+		//end of if
+		totalCredits += s.credits[i];
+	}
+	s.cgpa = totalGradePoint / totalCredits;
+	return s.cgpa;
+}
+
+
+
+class Faculty{
+	int empId;
+	string name, desig, dept;
+	float salary;
+	long nid;
+	Date doj;
+
+	void giveAssignment(Student studArr[], int size){
+		Document assign1;
+		assign1.setDocument();
+		loop: size times{
+			studArr[i].solveAndUploadAssignment(assign1);
+		}
+	}
+};
+
+
+int main(){
+	Student sakib;
+
+	cout<< getCgpa(sakib);
+	float f = sakib.calcAndReturnCgpa();
+	cout<< hasibul.calcAndReturnCgpa();
+	Studrnt cse213sec2[35];
+	loop: { cse213sec2[i].setInfo();}
+	Facluty skd;
+	skd.giveAssignment(cse213sec2, 35);
+
+	return 0;
+};
+
+-----------------------------------------------------
+
+int x;
+struct Node{
+	int val;
+	Node *next, *prev;
+};
+
+int main(){
+	Node n;
+	Node *ptr = new Node;
+	Node *ptr = &n;
+	cout<<x;
+	cout<<n.val;
+	cout<<ptr->val; //OR cout<<(*ptr).val;
+
+------------------------------------------------------------
+
+Q: If the caller function needs the called function to calculate and return one updated
+	value back to the caller, how to acheive this?
+
+void doAnotherV1(int & v1, int& v2){
+	v1 = ...;
+	v2 = .....;
+}
+
+struct CompositeRetuenType{
+	int r1, r2;
+};
+
+int doAnotherV2(int& v2){
+	int temp;
+	v2 = .....;
+	temp=...
+	return temp;
+}
+CompositeRetuenType doAnotherV2(){
+	CompositeRetuenType temp;
+	temp.r1 = .....;
+	temp.r2 =...
+	return temp;
+}
+
+void callerFn(){
+	int val1, val2;
+	//val1 = doSome(); //1 value can be returned
+	//val1 & val2 both will be updated by doAnother();
+	doAnotherV1(val1, val2); //pass-by-reference	
+	val1 = 	doAnotherV2(val2); //val2 as reference
+	CompositeRetuenType obj = doAnotherV3(); 
+	val1 = obj.r1; val2 = obj.r2;
+}
+ 
+
+============================================================
+To discuss in next week:
+for function/method parameters:
+	- pass-by-value
+	- pass-by-reference
+
+as non-void return type
+	- return-by-value (most likely, you have used return-by-value so far)
+	- return-by-reference
+
+scope of a variable/object
+
+struct/class:
+	- accessibility of the members(fields & methods): private, public, protected & package(only in java)
+
+
+
+
+
+
+
+
+
+
+
+
