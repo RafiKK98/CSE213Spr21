@@ -1,0 +1,244 @@
+2021-02-23 -- CSE213 Scratchpad for sec-2
+==========================================
+Today's Agenda:
+---------------
+1. Understanding scope of a variable/object
+2. Understanding accessibility of members (fields & methods) of a struct/object
+3. Understanding return-by-reference
+
+
+-------------------------------------------------------------------------
+Q: What do you mean by scope of a variable/object ?
+	- global scope
+	- local scope
+A: Region of source code from where the variable/object is accessible
+
+Scope:
+	- global scope
+		: accessible from anywhere in the program
+		#include<...>
+		using .....;
+		void doSome();
+		int x;	//global
+		int main(){
+			cin>>x;	//ok
+			doSome();
+			return 0;
+		}
+		void doSome(){
+			int y;	//local: doSome
+			cin>>y;
+			cout<<x; //ox
+		}
+
+		void doBig(int w){
+			//cout<<y	//error
+			w++;	//ok
+			cout<<x; //ox
+			cout<<w; //ok
+		}
+		
+		vood doAnother(){	
+			//...
+			doSome();
+		}
+
+
+	- local scope
+		: anytging declared inside a block. The following qualifies as block
+			- function definition
+			- class/struct definition [** for fields, accessibility is controlled by assess specifiers]
+			- {...} associated with loops
+			- {...} associated with if-else-if / switch-case
+			- {...} associated with nothing, bare-block
+		: all pass-by-VALUE parameters of a function definition is also local to that function block only
+		: all variables declared in a "loop ()" is also local to that loop
+		: anyting declared inside a function body is accessible only within that function.
+
+		Q: can you declare two variables/objects with same name ?
+		A: Yes, as long as the names belong to different scopes 
+			: 2- different local scopes
+			: 1-global, 1-local scope
+			: 1-local in a block and another-local in a nested scope within outer block
+		   NO, if they are declared within same scope
+
+	: Lifetime of a local variable/object is the lifetime of the local-block (as long as the block is being executed).
+
+	: If we declare a variable in a local scope, and there exist variable in global scope 
+		(outer scope in case of nested local scope) with same name, too  within that local scope, the local 
+		variable will always get priority and the global/outer one will be ignored. 
+		And therefore, there will be no confusion to the compiler to choose the correct memory.
+
+===============================================================================
+struct/class:
+	- accessibility of the members(fields & methods): 
+		private, public, protected & package(only in java)
+
+	PUBLIC:
+	public member(field or method) of a struct/class:
+   	  - the field can be read/write within the struct/class, 
+		and from a method of another struct/class,
+		and from any global function
+
+	  - the method can be called by sibling method of same struct/class
+		and from a method of another class
+		and from any global function
+
+
+	PRIVATE:
+	private member(field or method) of a struct/class:
+   	  - the field can be read/write within the struct/class only 	[DESIRED]
+			[accessible from member-functions/methods only]
+	  - the method can be called within the struct/class only 
+			[caller can be a sibling method of same struct/class]
+
+	**) By default, everything in struct is 'public'
+	**) By default, everything in class is 'private'
+===============================================================================
+as non-void return type
+	- return-by-value (most likely, you have used return-by-value so far)
+	- return-by-reference
+		: we can refer to something which has memory (variable/object)
+		: we can refer the variable/object during its lifetime only
+
+
+	//see CPP file to see the effect of return by reference
+
+	: We SHOULD NOT return anything local as reference from a function
+	: We can return:
+  	  - anything global as refernce from a function
+	  - if a parameter is received as reference, the function can also retutn that parameter as reference, too
+
+===============================================================================
+Global-Function / Method overloading
+Global-Function / Method chaining
+Operator overloading
+
+===============================================================================
+Global-Function / Method overloading
+	- we can overload a method/function by providing multiple definitions as long as
+		signature of those definitions are unique.
+		Signature of a function includes:
+			-function name with parameter list
+		Signature DOES NOT include return type
+
+	Signature (parameter list) can be unique:
+		- no of parameters differs
+			void doSome(){
+			    cout<<"In doSome()"<<endl;
+			}
+
+			void doSome(int x){
+			    //...
+			}
+
+		- type of parameter differs
+			void doSome(float f){
+			    //...
+			}
+
+			void doSome(int x){
+			    //...
+			}
+
+		- sequence of parameters deffers
+			void doSome(int x, float f){
+			    //...
+			}
+
+			void doSome(float f, int x){
+			    //...
+			}
+
+		- combination of the above 3 cases
+
+
+===============================================================================
+Global-Function / Method chaining
+
+class Person{
+	//private fields
+	public:
+	void buyFoodFromMarket(){
+		cout<<"Food is bought."<<endl;
+	}
+	void arrangeTheLivingRoom(){
+		cout<<"Living room is arranged."<<endl;
+	}
+	void serveFoodToGuests(){
+		cout<<"Food is served."<<endl;
+	}
+
+};
+int callerFunction(){
+	Person saymon;
+	saimon.buyFoodFromMarket();
+	saimon.arrangeTheLivingRoom();
+	saimon.serveFoodToGuests();
+	
+	saimon.buyFoodFromMarket().arrangeTheLivingRoom().serveFoodToGuests();
+
+}
+
+-----------------------------
+int x=10;
+int *ptr;	//an explicit pointer needs to be declared first
+
+ptr = new int[10];
+OR
+ptr = &x;	//next we need to explicitly assign the address to the explicit pointer
+
+cout<<ptr;	//address of x
+cout<<*ptr;	//x
+
+'this' is an implicit pointer 
+[you can't declare it, its becomes automatically available for every class that we define]
+[we also can't assign address of an objet to 'this' pointer
+//this = &saymon;		//error
+
+[
+	'this' will always store the address of client object. When a method is called, 
+	'this' will be updated with the address of the client. As soon as the method
+	returns, 'this' will be set to null.
+]
+
+
+Q: Have you used method chaining before today's class ?
+A: Yes. You have chained methods in your very first class of CSC101
+	cout is an object of ostream class
+	cin is an object of istream class
+	int x; float f;
+	cin>>x;		// cin.operator>>(x);
+	cin>>f;
+
+	cin>>x>>f;	//cin.operator>>(x).operator>>(f);
+	
+
+	in istream class, there is a method called ' RT operaor<<(int val)'
+class istream{
+	//privat fields
+	public:
+	istream& operator>>(int& val){
+		//code to take input from KB, validate and store the value into the memory of val
+	}
+	istream& operator>>(flaot& val){
+		//code to take input from KB, validate and store the value into the memory of val
+	}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
