@@ -1,0 +1,361 @@
+2021-02-28 -- CSE213 Scratchpad for sec-2
+==========================================
+
+Global-Function / Method overloading
+Global-Function / Method chaining
+Operator overloading
+
+===============================================================================
+void sortInts(int a[] , int size ){...}
+void sortDoubles(double a[] , int size ){...}
+void sortStrings(string a[] , int size ){...}
+
+void sortArray(int a[] , int size ){//quick sort...}
+//void sortArray(int a[] , int size ){//bubble sort...}
+void sortArray(double a[] , int size ){...}
+void sortArray(string a[] , int size ){...}
+
+void callerFn(){
+	int intArr={1,2,3,4,55,32,76,22};
+	double doubleArr={1.1,2.2,4.2,1,6};
+	string strArr={"afsdf", "gfdh", "gdgg"};
+	sortInts(intArr,8);
+	sortDoubles(doubleArr,3);
+	sortStrings(strArr,3);
+
+	sortArray(intArr,8);
+	sortArray(doubleArr,3);
+	sortArray(strArr,3);
+}
+
+Global-Function / Method overloading
+	- we can overload a method/function by providing multiple definitions as long as
+		signature of those definitions are unique.
+		Signature of a function includes:
+			-function name with parameter list
+		Signature DOES NOT include return type
+
+	Signature (parameter list) can be unique:
+		- no of parameters differs
+			void doSome(){
+			    cout<<"In doSome()"<<endl;
+			}
+
+			void doSome(int x){
+			    //...
+			}
+
+		- type of parameter differs
+			void doSome(float f){
+			    //...
+			}
+
+			void doSome(int x){
+			    //...
+			}
+
+		- sequence of parameters deffers
+			void doSome(int x, float f){
+			    //...
+			}
+
+			void doSome(float f, int x){
+			    //...
+			}
+
+		- combination of the above 3 cases
+
+
+Application of function/method overloading [example]:
+	void sortArray(int arr[], int size){...}
+	void sortArray(float arr[], int size){...}
+	void sortArray(string arr[], int size){...}
+
+- There are some special purpose methods whose names are specific & pre-decided.
+  If we want to have multiple definitions of those methods, then method overloading is the solution
+
+
+
+
+===============================================================================
+Global-Function / Method chaining
+
+class Person{
+	//private fields
+	public:
+	void buyFoodFromMarket(){
+	//Person& buyFoodFromMarket(){
+		cout<<"Food is bought."<<endl;
+		//return *this;	//we need to return the client
+	}
+
+	void arrangeTheLivingRoom(){
+	//Person& arrangeTheLivingRoom(){
+		cout<<"Living room is arranged."<<endl;
+		//return *this;
+	}
+	void serveFoodToGuests(){
+	//Person& serveFoodToGuests(){
+		cout<<"Food is served."<<endl;
+		//return *this;
+	}
+
+};
+int callerFunction(){
+	Person anik, asif;
+	anik.buyFoodFromMarket();
+	anik.arrangeTheLivingRoom();
+	anik.serveFoodToGuests();
+	
+	anik.buyFoodFromMarket().arrangeTheLivingRoom().serveFoodToGuests();
+	asif.buyFoodFromMarket();
+
+}
+
+-----------------------------
+int x=10;
+int *ptr;	//an explicit pointer needs to be declared first
+
+ptr = new int[10];	/next we need to explicitly assign the address to the explicit pointer
+OR
+ptr = new int;		/next we need to explicitly assign the address to the explicit pointer
+OR
+ptr = &x;		//next we need to explicitly assign the address to the explicit pointer
+
+cout<<ptr;	//address of x
+cout<<*ptr;	//x
+
+class Student{};
+//Student *this; //can't declare
+
+
+class Employee{};
+//Employee *this; //can't declare
+
+'this' is an implicit pointer 
+[you can't declare it, its becomes automatically available for every class that we define]
+[we also can't assign address of an objet to 'this' pointer]
+//this = &asif;		//error
+
+[
+	'this' will always store the address of client object. When a method is called, 
+	'this' will be updated with the address of the client of that call. As soon as the method
+	terminates, 'this' will be set to null.
+]
+
+
+	
+
+
+
+
+	int a,b,c;
+	c = a+b;
+
+	class Matrix{...};
+	class ComplexNo{
+		...
+		public:
+		ComplexNo operator+(ComplexNo c){
+			ComplexNo temp;
+			temp.real = real + c.real;
+			temp.img = img + c.img;
+			return temp;
+		}
+	};
+
+
+	Student s1, s2, s3;
+
+	ComplexNo c1, c2, c3;
+	c3 = c1.add(c2);
+	c3 = c1 + c2;	// c3 = c1.operator+(c2);
+
+	operator-method: method name: "operator+"
+	
+	Matrix m1, m2, m3;
+	m3 = m1 + m2;
+
+	c6 = c1 + c2 + c3 + c4 + c5;
+	c6 = c1.operator+(c2).operator+(c3).operator+(c4).operator+(c5);
+
+
+
+Q: Have you used method chaining before today's class ?
+A: Yes. You have chained methods in your very first class of CSC101
+
+	cout is an object of ostream class	//declared in std namespace
+	cin is an object of istream class
+	int x; float f;
+	cin>>x;		// cin.operator>>(x);
+	cin>>f;		// cin.operator>>(f);
+
+class istream{
+	//private fields...
+	public:
+	istream& operator>>(int& val){...}
+	istream& operator>>(flaot& val){...}
+};
+
+	cin>>x>>f;	//cin.operator>>(x).operator>>(f);
+	cout<<"Id="<<id<<endl;
+
+
+
+
+
+
+
+
+
+
+
+	in istream class, there is a method called ' RT operaor<<(int val)'
+class istream{
+	//privat fields
+	public:
+	istream& operator>>(int& val){
+		//code to take input from KB, validate and store the value into the memory of val
+	}
+	istream& operator>>(flaot& val){
+		//code to take input from KB, validate and store the value into the memory of val
+	}
+};
+
+
+
+-----------------------------
+
+c6 = c1 + c2 + c3 + c4 + c5;
+
+c6 = 	c1.operator+(c2).operator+(c3).operator+(c4).operator+(c5);
+Client:	c1		temp		temp		temp
+
+
+---------------------------
+
+
+void doSome(int y){} //value
+void doSome(int& y){} //reference
+void doSome(int* ptr){} //address
+
+doSome(x);	//pass-by-value
+doSome(x);	//pass-by-reference
+doSome(&x);	//pass-by-address
+
+cin>>x>>f>>str; buffer of cin: "chars for x, chars for f, chars for str from KB	"
+
+cin>>x;
+123456	-> KB: '1''2''3''4''5''6'\n' 
+	-> accumulated in buffer of cin, 7 bytes 
+		-> conversion/parsing from buffer 
+			-> 4 bytes int 
+				-> will be stored to address of x
+
+==========================================================================================
+class ComplexNo{
+	?? operator>>(??){...}
+};
+
+istream& operator>>(istream& myIn, ComplexNo& c){
+
+}
+
+int main(){
+	ComplexNo c1;
+	cin>>c1; 	//operator>>(cin,c1);
+	//invalid-cin.operator>>(c1);
+
+
+	//c1>>cin;	//invalid-c1.operator>>(cin);
+
+	cin>>c1>>c2; 	//operator>>(	operator>>(cin,c1)	, 	c2);
+	return 0;
+}
+
+can we define the method in ComplexNo class?
+
+
+
+
+
+
+
+
+
+?? = x + y + z;
+
+c4 = c1 + c2 + c3;	//c4 = c1.operator+(c2).operator+(c3);
+					temp.operator(c3);
+c4 			=			temp
+
+
+class Array{
+	int *ptr;
+	int size;
+	int operator[](int index){
+		return ptr[index];
+	}
+};
+
+class ComplexNo{
+	ComplexNo operator+(ComplexNo c){..... return temp;}
+	void operator+=(ComplexNo c){
+		real += c.real;	
+		img += c.img;
+	}
+}
+
+Array arr;
+
+cout<<arr.ptr[i];
+cout<<arr[i];
+
+x+y;
+cout<<x+y;
+z=x+y;
+doSome(x+y, 100);
+c1+c2;
+
+c1 += c2;	c1.operator+=(c2);
+
+if(c1==c2)
+
+------------------------------------------------
+void operator>>(istream& myIn, ComplexNo& c){
+	myIn>>c.real;
+	myIn>>c.img;	
+}
+
+cin>>c1;
+cin>>c2;
+---------------------------------------------
+
+istream& operator>>(istream& myIn, ComplexNo& c){
+	myIn>>c.real;
+	myIn>>c.img;	
+	return myIn ;
+}
+
+cin>>c1>>c2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
