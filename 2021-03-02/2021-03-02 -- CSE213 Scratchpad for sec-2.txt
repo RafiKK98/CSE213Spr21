@@ -1,0 +1,276 @@
+2021-03-02 -- CSE213 Scratchpad for sec-2
+==========================================
+
+Today's Agenda:
+===============
+Operator: pre/post increment/decrement	++ / --
+Constructor
+Project topic allocation
+practice problem discussion
+
+for(...;...; i++)
+
+int x=10, y=10;
+
+x++;	cout<<"x="<<x<<endl;	//11
+++y;	cout<<"y="<<y<<endl;	//11
+----------------------------------------
+
+int x=10, y=10;
+int z1,z2;
+
+z1 = ++x;
+cout<<"z1="<<z1<<", x="<<x<<endl;	//11,11
+z2 = y++;
+cout<<"z2="<<z2<<", y="<<y<<endl;	//10,11
+
+
+ComplexNo c1,c2;	//1+2i	1+2i
+//c1++;		//2+3i
+//++c2;		//2+3i
+
+
+class ComplexNo{
+	int real,img;
+	public:
+	//pre-increment version
+	ComplexNo& operator++(){
+		++real;
+		++img;
+		return *this;
+	}
+
+	//post-increment version
+	ComplexNo operator++(int x){
+		ComplexNo temp; temp.real = real; temp.img = img;
+		++real;
+		++img;
+		return temp;
+	}
+};
+
+cout<<"c1++ = "<<c1++<<endl;	//c1++ = 1+2i
+cout<<c1;			//2+3i
+
+cout<<"++c2 = "<<++c2<<endl;	//++c2 = 2+3i
+cout<<c2;	//operator<<(cout,c2);		//2+3i
+
+cout<<c1++;	operator<<(cout	, c1.operator++(randomIntValue) );
+cout<<++c2;	operator<<(cout	, c2.operator++() );
+
+x+y-z;
+
+-----------------------------------------------------
+class ComplexNo{
+	//...
+	public:
+	//pre-increment version
+	ComplexNo& operator++(){
+		++real;
+		++img;
+		return *this;
+	}
+
+	//post-increment version
+	ComplexNo operator++(int x){
+		ComplexNo temp; temp.real = real; temp.img = img;
+		real++;
+		img++;
+		return temp;
+	}
+
+};
+
+
+Unary operator: 1 operand, that is the client, therefore no need of parameter
+++c1;		c1 is the client, no parameter
+c2++;		c2 is the client, no parameter
+
+Binary operator: 2 operands, 1st operand is the client, therefore 2nd operand will be parameter
+c3 = c1+c2;	c1 is client, c2 is parameter	(method)
+c3 = c1+10;	c1 is client, 10 is parameter	(method)
+c3 = 10+c1;	10 does not qualify as client, therefore, both 10 & c1 will be parameter (global)
+
+===========================================================================
+
+Constructor: constructs class instance (object)
+
+Student asif;	//memory allocated
+...
+...
+... //during this period from memory allocation, the fields contain garbage
+asif.setInfo();		//this method will store legit content into memory of the fields
+
+int x;
+..
+.
+..
+
+cin>>x;		x = ...;
+
+- Constructor ensures prevention of gurbage. 
+- Constructor AUTOMATICALLY store some legit value to fields, as soon as memory is allocated.
+- Constructor is a special purpose method having class name as its name.
+- Constructor can't wait to be called like other methods.
+- Constructor automatically gets fired whenever memory is allocated for an object (class instance)
+
+
+------------------------------------------------------------------------------------------
+
+void:		return control back to the caller from called function 
+			so that caller can continue 
+non-void: 	return control+data back to the caller from called function,
+			 so that caller can use the returned data and continue 
+
+if a function/method has return-type, it means there will be a caller of that function/methos.
+
+Nobody calls constructor, hence there is no caller of constructor, and therefore there is no return type.
+
+
+
+-----------------------------------------
+
+string str="...";
+
+str.length();
+str.size();
+
+class Address{
+
+};
+
+class Student{
+	int id;
+	string name;
+	float cgpa;
+	Address studAddress;
+};
+
+--------------------------------------------------------
+
+natural separator of input for cin>> is space & enter(carriage return + newline character)
+
+cin>>x;		//123 enter
+
+buffer:	'1''2''3''\n'
+	'1''2''3' will be processed and converted to 4-byte int (parsing)
+		then it will store the 4-bytes into x
+buffer:	'\n'
+cin>>str;	//Hello enter
+buffer:	'\n''H''e''l''l''o''\n'
+
+cin>>x; 
+buffer:	'1''2''3''\n'
+after processing and storing into x,
+buffer:	'\n'
+getline(cin,str);	//123 enter Hello
+
+
+-----------------------------------------------------------------
+
+class Address {
+	// MUST have houseNo, roadNo, street, thana, district, zipCode, etc. as private fields
+	Public: // add necessary methods including setters and getters,
+	// AND/OR declare friends, so that the given main() works
+	//Option-1: void setHouseNo(int val){houseNo=val;}
+	//option-2: void setHouseNo(){cout<<...; cin>>houseNo;}
+	//option-3: void setAddressInfo(){//prompt for all, multiple cin>>.. /getline(cin,..) }
+	friend void/istream& operator>>(istream&, Address&);
+	friend ostream& operator<<(ostream&, Address);
+};
+class Employee{
+	// MUST have employeeID, name, department and the following as private fields
+	Address empAddress;
+	Public: // add necessary methods including setters and getters,
+	Employee(){
+		//
+	}
+	Employee(int x, string s1, string s2){
+		employeeID=x; name=s1; department = s2;
+		int hn;
+		//Option-1: cout<<"Enter road no: "; cin>>hn; empAddress.setHouseNo(hn);
+		//option-2: empAddress.setHouseNo();
+		//Option-3: empAddress.setAddressInfo();
+	}
+	// AND/OR declare friends, so that the given main() works
+	friend void/istream& operator>>(istream&, Employee&);
+	friend ostream& operator<<(ostream&, Employee);
+
+	bool operator==(int zip){
+		if(empAddress.getZipCode() == zip) return true;
+		else return false;
+	}
+};
+
+void/istream& operator>>(istream& myIn, Address& a){
+	cout<<...;		myIn>>a.houseNo;
+	....
+	return myIn;
+}
+
+ostream& operator<<(ostream& myOut, Address a){
+	cout<<...<<a.houseNo;
+	....
+	return myOut;
+}
+
+void/istream& operator>>(istream& myIn, Employee& e){
+	cout<<...;		myIn>>e.employeeID;
+	cout<<...;		myIn>>e.name;
+	cout<<...;		myIn>>e.department;
+	myIn>>e.empAddress;
+	return myIn;
+}
+
+ostream& operator<<(ostream& myOut, Employee e){
+	myOut<<...<<e.employeeID;
+	...
+	myOut<<e.empAddress;
+	return myOut;
+}
+
+int main(){
+	Employee e1, e2(4161, “S K Dey”, “CSE”);
+	//parameterized constructor also ask for address details
+	cout << ”Give input for employee 1: “ << endl;
+	cin >> e1;
+	//Should ask employeeID, name, department.
+	//Then ask address related information.
+	cout << ”Complete information of the employees are: “ << endl;
+	cout<< e1 << e2 << endl;
+	cout<<”The employee e1 “;
+	if(e1 == 1229) cout << ”lives in Bashundhara R/A.” << endl;
+	else cout << ”does NOT lives in Bashundhara R/A.” << endl;
+	//comparing zipCode field
+	return 0;
+}
+
+===========================================================================================
+int x; string str;
+cin>>x;
+
+cin>>str;		//space can't be part of the input
+getline(cin,str);	//space can be part of the input
+
+Q: Why you can't use >> to take textual input where space is part of the input?
+A: 
+
+
+
+
+Introduction to Java:
+---------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
