@@ -1,0 +1,79 @@
+Project name : Simulating operations of Paper mills (Hakkani Group)
+
+Users and Goals :
+	I.Administration:
+		1)Set/View/Update employee info.
+			- Will log in as admin.
+			- Able to enter info of a new employee through 'Add new employee' option. This will prompt him to enter id, name and designation.
+			- Able to view a certain employee's info or update existing info. Through clicking "View employee" button 
+			he will see "Enter id" option to enter the id of the employee he wants to see. The same way he can update an employee info through the 
+			"Update employee" button.
+		2)Schedule meetings.
+			- Able to schedule meetings among employees using the "set meeting schedule" button. Then he can select which employee/department to set
+			meetings with.
+		3)Responding to leave applications from employees.
+			- Able to view leave applications from workers, security staffs, supervisors through the "View leave applications" button. 
+			This will show the applications sent by the said employees according to their ids. Selecting an application will show the message sent by
+			the employee. There will be a radio button corresponding to that application with 'Yes' and 'No' options and a 'send reply' button. The 'Yes' 
+			option will grant leave permit and the 'No' option will not grant leave permit. After clicking the 'send reply' there will be a message sent
+			to the employee corresponding to the radio button options.
+		4)Set/Update company policies.
+			- Able to set company policies through "Set company policies" button which other employees can view. Can be able to update the policies 
+			through "Update policy" button as well.
+		5)Send notice to all employees.
+			- Post different notices to all employees through "Post notice" button.
+	II.Supervisor:
+		1)Check his work schedule.
+			- Will log in as supervisor through id and password. In home scene, clicking the "check work schedule" button will show him his 
+			work schedule in 24hour format.
+		2)Organize groupings for workers.
+			- Will organize worker groups through clicking "Organize groups" button. This will show the list of workers according to their ids,
+			the supervisor will select ids and add them to a list which will be the assigned group, then click 'save' button.
+		3)Assign works to the groups.
+			- Will assign work to each worker group using 'Assign work' button. This will open the list of works available and will also show
+			the list of worker groups. The supervisor will be able to drag and drop a particular group to a work to assign that group the particular work.
+		4)Can send leave application.
+			- There will be a "Leave Application" button which will open a textarea to write the application and a 'send' button which will
+			send the leave application.
+		5)View progression of workers and notice.
+			- There will be a "Notifications" button which will show the work progression reports sent by workers.
+			- There will be a "View Notice" button which will show all the notices posted sorted by time.
+	III.Worker:
+		1)Check his work schedule.
+			- Will log in as worker through id and password. In home scene, clicking the "check work schedule" button will show him his 
+			work schedule in 24hour format.
+		2)View assigned groups and projects assigned by the supervisors.
+			- The "View Assigned Projects" button in the home scene will popup a messagebox which shows the assigned group and corresponding works.
+		3)Report work status, machine condition.
+			- Will be able to update work progess by reporting it through "Work Progression Report" button, which will open a textarea where they can
+			write the progression report and send it to the supervisor by clicking the 'send' button.
+			- If there's something wrong with the machines, he can send a report of it through "Machine report" button, which will open a textarea
+			where he can describe the condition and then click 'Send' button.
+		4)Can Send leave application.
+			- There will be a "Leave Application" button which will open a textarea to write the application and a 'send' button which will
+			send the leave application.
+		5)View notice.
+			- There will be a "View Notice" button which will show all the notices posted sorted by time.
+	IV.Supplier:
+		1)View product contract.
+			- Will log in as supplier through id and password.
+		2)Arrange delivery schedule for products.
+			- There will be a "Schedule Delivery" button to arrange delivery schedule for products.
+		3)Send report of delivery.
+			- Clicking "Delivery Report" button will open a textarea where he can write report of the delivery and send it by clicking the 'Send' button.
+		4)Request for meeting.
+			- Can request for meeting with other employees through clicking the "Request Meeting" button.
+	V.Security Staff:
+		1)Check his work schedule.
+			- Will log in as security staff through id and password. In home scene, clicking the "check work schedule" button will show him his 
+			work schedule in 24hour format.
+		3)Send emergency messages to other departments.
+			- There will be an "Emergency Message" button which will open a textarea for the staff to describe the emergency situation and send it.
+		4)Can send leave applications.
+			- There will be a "Leave Application" button which will open a textarea to write the application and a 'send' button which will
+			send the leave application.
+		5)View notice.
+			- There will be a "View Notice" button which will show all the notices posted sorted by time.
+	
+		
+		
