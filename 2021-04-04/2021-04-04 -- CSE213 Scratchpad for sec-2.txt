@@ -1,0 +1,183 @@
+2021-04-04 -- CSE213 Scratchpad for sec-2
+==========================================
+
+Exception Handling:
+===================
+
+c = a+b;	//No syntax error
+cout << a+b;	//No syntax error
+doDome(a+b);	//No syntax error
+a+b		//Systax error
+
+
+public int add(int x, int y){
+	return x-y;		//logical error
+}
+
+Exception:
+----------
+  - There will not be any syntax error	(otherwise, we can't compile & run it)
+  - There may not be any logical error
+  - Still your program may crash due to some runtime context (Exception)
+  - If an exception occurs, your program will crash, if it is not handled.
+
+Java Exception:
+---------------
+  - Unchecked exception:
+  ----------------------
+	- These are the exceptions which can be avoided by optimizing the source code
+	- Therefore, we are not forced to handle unchecked exceptions
+	- The code we have written till last week was the candidate for Unchecked exceptions only
+
+	int[] arr = {11,22,33,44,55};
+	index = s.nextInt();
+	sout(arr[index]);	//44	, if index is 3
+	sout(arr[index]);	//Exception, if index is 5 and your program will crash
+
+	int[] arr = {11,22,33,44,55};
+	index = s.nextInt();
+	if(index>=0 && index<arr.length)	//exception is avoided by optimizing the source code
+		sout(arr[index]);	
+	
+	a = s.nextInt();
+	b = s.nextInt();
+	c = a/b;		//arithmetic excption, if b is zero
+	
+	
+	int arr[] = {10,20,30,40,50};
+	cout<<arr[3];	//40
+	cout<<arr[5];	//garbage
+
+  - Checked exception:
+  --------------------
+	- These are the exceptions which occurs due to the influence of some external factors,
+		which are beyond the control of the source code. 
+		Ex: 
+	  	- trying to write to a read-only file
+		- trying to write to a file where the disk is full / insufficient disk space
+		- trying to read a corrupt file
+		- network connection is lost while sending/receiving data packets
+		Therefore, it may not be possible to avoid them at runtime by optimizing the source code
+	- Hencee, it is MANDATORY to handle checked exceptions
+
+
+Five keywords:
+  - try (block):
+  --------------
+	try{
+		//here we write the code
+		//it is important to keep the critical statement (s) in this block
+		//a critical statement is a statement having potential to cause an exception at runtime
+
+		//if no exception occurs, after completing try block program will continue from end of catck block (s)
+
+		//if there is an exception:
+		  - The context of the eception will be detected and a most appropriate eception class instance
+		      represting that context will be implicitly thrown from try block
+	          - control will come out of the try block (free fall), and it will never go back (unlike caller method)
+		  - control will enter to one of the following catck blocks (exception handler block [NOT METHOD])
+
+		  - Therefore, 'try' must be followed by 1/more 'catch' blocks
+		  - But if you have a 'finally' block then having 'catch' block(s) is(are) optional
+
+	}
+
+  - catch (block):
+  ----------------
+	catch(ExceptionClassName e){
+		//handling code to resolve the exception caused by the context represented by e
+	}
+
+  - finally (block):
+  -----------------
+
+  - throws:
+  ---------
+
+  - throw (to explicitly throw an exception):
+  -------------------------------------------
+     try{
+
+	- However, if you want to treat a context as an exception, but JRE doesn't, then
+	you can explicitly throw an Exception instance using 'throw'
+		
+	if(.....) throw new IOException();
+	else if(....) throw new MyException();	//subclass of one of the classes of Exception hierarchy
+		
+    }
+
+
+=====================================================================================
+Problem (Metaphor):
+
+try{					//rooftop
+	//...
+	//crtical statements
+	//...
+}
+catch(FootBall ball){....}		//9-th floor
+catch(PingPong ball){....}		//8-th floor
+catch(TennisBall ball){...}		//7-th floor
+------------------------------------------------------------------------------------
+
+Problem (real):
+
+try{					//rooftop
+	//...
+	//crtical statements
+	//...
+}
+catch(generic super class handle){....}				//9-th floor
+catch(some subclass exception instance handle){....}		//8-th floor
+catch(some sub-subclass exception instance handle){....}	//7-th floor
+catch(TennisBall ball){...}		//7-th floor
+------------------------------------------------------------------------------------
+
+Solution (Metaphor):
+
+try{					//rooftop
+	//...
+	//crtical statements
+	//...
+}
+catch(PingPong ball){....}		//9-th floor
+catch(TennisBall ball){...}		//8-th floor
+catch(FootBall ball){....}		//7-th floor
+
+------------------------------------------------------------------------------------
+
+Solution (real):
+
+try{					//rooftop
+	//...
+	//crtical statements
+	//...
+}
+catch(Exception's sub-sub-class handle){//specific handling code}	//9-th floor
+catch(Exception's sub-class2 handle){//specific handling code}		//8-th floor
+catch(Exception's sub-class1 handle){//specific handling code}		//7-th floor
+catch(Exception class handle){//generic handling code}			//6-th floor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
