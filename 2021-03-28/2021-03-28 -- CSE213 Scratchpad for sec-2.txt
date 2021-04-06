@@ -1,0 +1,115 @@
+2021-03-28 -- CSE213 Scratchpad for sec-2
+==========================================
+
+Java FXML Application:
+----------------------
+- Uses FX libraries
+
+
+- Built on MVC framework
+
+  - M: Model	
+	--> java class/interface (.java)
+	--> classes to represent application data (No direct interaction with user)
+
+  - V: View	
+	--> fxml file (.fxml)	
+	--> Classes to represent visual elements of the GUI, such as Button, MenuItem (direct interaction with user)
+	
+  - C: Controller
+	--> java class (.java)
+	--> Every view will have a controller class consists of:
+		- handles of the visual instances of the elements of your view (as private fields)
+		- event-handler methods assciated with the elements of the view
+
+------------------------------------------
+HTML: hipertext markup language
+	- collection of tags
+
+XML: extended markup language [to create their own tags]
+
+FXML is based on XML
+	- The default window of FXML application is a Stage
+	- The view we see on stage is a scene (fxml file is rendered)
+	- An FXML application can have several scenes
+	- When we nevigate from one scene to another:
+		- we can replace the old scene with new scene on the default stage
+		- we can also load the new scene on a brand new stage
+			(now two window will be there)
+
+
+==================================================================================
+public class ArithmeticOperationSceneController implements Initializable {
+
+    @FXML    private TextField xTextField;
+    @FXML    private TextField yTextField;
+    @FXML    private Button addButton;
+    @FXML    private Button subtractButton;
+    @FXML    private Label rsultLabel;
+
+    @FXML
+    private void addButtonOnClick(ActionEvent event) 
+	String xStr, yStr;
+	xStr = xTextField.getText();	//"12"
+	yStr = yTextField.getText();	//"13"
+
+	//xStr+yStr;	//"1213"
+
+	int xVal, yVal, sum;
+	xVal = Integer.parseInt(xStr);	//number 12, parsing successful
+	yVal = Integer.parseInt(yStr);	//number 13, parsing successful
+	sum = xVal + yVal;
+
+	String resultStr = Integer.toString(sum);	
+	rsultLabel.setText(resultStr);
+
+	rsultLabel.setText("X + Y = "+sum);		//int x = 10;	"abc="+x  --> "abc=10"	
+    }
+
+    
+}
+
+String str ="1a2b3";
+int z = Integer.parseInt(yStr);	// parsing will fail & program will crash (if exception is not handled)
+
+
+------------------------------------------------------------------------------------
+
+
+
+Wrapper class:
+--------------
+	There are methods of many library classes which can take any class instance as parameter
+	ArrayList<Granade> gList;
+	ArrayList<ComplexNo> gList;
+	//ArrayList<int> gList;	//error, int is not a class
+	ArrayList<Integer> gList;	//error, int is not a class
+
+
+	premitive	--> 		corresponding wrapper class
+	-----------------------------------------------------------
+	int		-->		Integer
+	float		-->		Float
+	...
+	wrapper class exists for all premitives
+
+
+
+
+------------------------------------------------------------------------------------
+
+
+Scanner s = new Scanner(System.in);
+
+int x = s.nextInt();		"123"	--> to a field of Scanner
+
+
+
+
+
+
+
+
+
+
+

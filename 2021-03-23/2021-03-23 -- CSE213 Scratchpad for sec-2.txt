@@ -1,0 +1,125 @@
+2021-03-23 -- CSE213 Scratchpad for sec-2
+==========================================
+
+==========================================================================================
+
+Project MS-1:
+-------------
+IRAS:
+
+User-1: Faculty
+  Goal-1: Submit grade for a course taken in current semester
+  Goal-2: Take attendance for the class
+  Goal-3: Give assignments to students
+  Goal-4: ...
+  Goal-5: ...
+User-2: Student
+  Goal-1: Register Course for upcoming semester
+	Workflow (sequence of background as well as user-initiated events)
+	e-1: user must login as 'Student'. If login is successful, 
+		homeScene of that user will be loaded
+		else, ......
+	e-2: choose 'register course' option. It will:
+		- validate date, time, creditsCompleted, facultyEvStatus, 
+			probationStatus, docsPending,... of the student
+		- if validation is successfull, list of offeredcourses applicable to the 
+			student will be loaded
+		  else,.....
+	e-3: select courses one-course at a time. While adding a course need to check:
+		- time clash with already selected courses
+		- capacity overflow
+		- prerequisite done
+		- If retake, rekate policy compliance
+		- ...
+		- repeat e-3 as multiple times
+
+	e-4: Proceed for registration. Need to check:
+		- Once again check capacity for ALL selected course
+		- Minimum & Maximum credit range
+		- If paired course, Course+Lab both are selected, 
+			or one is completed and the other is retake
+		- Minimum foundation requirement is fulfilled or not
+		- ....
+		- if fails,.....
+		
+	e-5: Commit to database & generate bill
+
+  Goal-2: Evaluating Faculty for a course taken in current semester
+  Goal-3: Pay tuition fees for current semester
+  Goal-4: Add/deop...
+  Goal-5: Generate transcript
+
+
+User-3: AdmissionOfficer
+User-4: CitsOfficer
+User-5: RegOfficeOfficer
+
+==========================================================================================
+- Multiple inheritance
+
+public class Person{	//in-house class
+	public void display(){...}
+	public void print(){...}
+}
+
+public class Researcher{	//imported from library
+	public void show(){...}
+	public void print(){...}
+}	
+
+
+public class Faculty extends Person, Researcher{	//caution, this line is a syntax error
+
+}
+
+public class MainClass{
+  p s v main(...){
+	Faculty skd = new Faculty();
+	skd.display();		skd.show();	
+	skd.print();	//?????
+  }
+}
+
+--> C++ will allow to extend multiple superclass, 
+	but because of the potential runtime risk as discussed abobe 
+	(inheriteting same-field / method-with-same-signature from both superclasses)
+	Java will NEVER ALLOW to extend multiple super classes.
+
+--> Then, how to acheice multiple inheritance in Java?
+	Answer: 
+		- one predecessor can be a CLASS
+		- rest of the predecessors MUST BE INTERFACE
+
+- Interface
+	- Interface is a cousin (by-nature) of abstract-class. It can contain:
+		- abstract-methods only
+		- fields will be static+final (shared and constant)
+
+
+==========================================================================================
+int x, z=20;	//initialization is potional
+...
+cin>>x;
+x=10; z=30;
+
+// const int y;	//error, MUST initialize
+const int y=100;
+// y++;	//error, can't change value
+
+
+'final' in Java:
+  - final field: MUST be initialized and value can't be changed
+  - final method: can't be overridden in subclass
+  - final class: can't be extended
+
+-------------------------------------------------------------------------------------------
+Q: Did you use inheritance before we discussed the topic in class?
+A: Yes. If a class explicitly does not extend an preexisting class, 
+	then automatically it becomes a subclass of 'Object' [Adam of java species]
+
+
+
+
+FXML Application development
+
+

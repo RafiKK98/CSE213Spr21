@@ -1,0 +1,143 @@
+2021-04-01 -- CSE213 Scratchpad for sec-2
+==========================================
+
+File Handling in Java:
+======================
+
+Text file:	
+----------
+  - Text file is a file whose content can be viewed as a meaningfull text using a text editor.
+	Ex: .txt, .docx, .cpp, .java,...
+	A	--> 65	--> 64+1		--> 01000001
+
+----------Test.txt---------	text file where an int is stored as series of characters of the digits
+123
+---------------------------
+
+		ASCII
+'1''2''3'  -->	49		50		51
+		32+16+1		32+16+2		32+16+3
+		00110001	00110010	00110011
+
+Binary file:
+------------
+  - Audio file, video file, image file, database, pdf
+
+----------Test.bin---------	binary file where an int is stored as int
+123
+---------------------------
+
+123	--> 	64+32+16+8+2+1
+		00000000 00000000 00000000 01111011
+
+----------Students.bin---------	binary file where Student instances are stored as series of bytes (serialization)
+//content of this file will be discussed later
+-------------------------------
+
+
+In your project:
+----------------
+  - text file: readme.txt, readTermsAndAgreement.txt, faq.txt, userManual, helpDocs,.....
+  - binary file: 
+     - store individual non textual data such as int, float, double, String, etc..
+     - [mostly you will be using binary file to] store the instances (of model classes) into file for future use 
+
+===========================================================================================
+
+For any I/O, we must use a stream class
+
+C++:
+====
+Console I/O:
+	Input:	istream	[default input device is KB, for 'cin' only, not for your own istream object]
+	Output:	ostream	[default output device is Screen, for 'cout' only, not for your own ostream object]
+	- Instead of declaring our own objects, we use cin & cout, 
+		which are already declared in 'std' namespace and they are linked/associated with KB & screen
+	- If we declare our own objects (myIn/myOut), we need to link it with source/destination
+File I/O:
+	Input:			ifstream
+	Output:			ofstream
+	Input&Output: 		fstream
+	- For file i/o, there is no objects declared in 'std' namespace. 
+	- And therefore we MUST declare the objects and link/associate it with a specific file
+	
+------------------------------------------------------------------------------------------------------------------
+
+Java:
+=====
+Console I/O:
+   Input:  InputStream [default input device is KB, for 'System.in' only, not for your own InputStream instance]
+   Output: PrintStream [default output device is Screen, for 'System.out' only, not for your own PrintStream instance]
+	- Instead of declaring our own handles, we use System.in & System.out, 
+		which are already linked/associated with KB & Screen by the constructor of System class.
+	- If we declare our own handles (myIn/myOut), we need to link it with source/destination
+
+File I/O:
+ - Byte stream: [typical use case]: 
+	- for text file (character stream will be a better option)
+	- used by Data & Object streams internally
+	Input:		FileInputStream
+	Output:		FileOutputStream
+	
+ - Character stream: [typical use case: for text file]
+	Input:		FileReader
+	Output:		FileWriter
+
+ - Data stream: [typical use case: for binary file]
+	Input:		DataInputStream
+	Output:		DataOutputStream
+
+- Object stream: [typical use case: for binary file]
+	Input:		ObjectInputStream
+	Output:		ObjectOutputStream
+
+DataOutputStream dos = new .....();
+dos.writeInt(x);
+
+ObjectOutputStream oos = new .....();
+oos.writeObject(asif);
+
+for(Student s: studList){
+	oos.writeObject(s);
+}
+
+asif.id		--> 123 (int)
+asif.cgpa	--> 3.56 (float)
+asif.name	--> Asif (String)
+
+"123"
+"3.56"
+"Asif"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
