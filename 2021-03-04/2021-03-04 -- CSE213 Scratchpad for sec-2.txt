@@ -1,0 +1,201 @@
+2021-03-04 -- CSE213 Scratchpad for sec-2
+==========================================
+Practice Problem Q3:
+
+class Book{
+	string title, ISBN_No; float price;
+	Book(string t, string isbn, float price){
+		title = t;
+		ISBN_No = isbn;
+		(*this).price = price;
+
+		cout<<"..."; cin>>noOfAuthor;
+		ptr = new Author[noOfAuthor];
+		loop:	
+			ptr[i].setAuthorInfo();
+			OR,
+			cin>>ptr[i];
+	}
+}
+
+====================================================================
+Introduction to Java:
+
+C++ main():
+--------------
+#include<iostream>
+#include<cstdlib>
+int main(int argc, char* argv[]){
+int main(int sz, string s[]){
+	cout<<"Hello World";
+	for(int i=0; i<sz; i++) cout<<s[i];
+	return 0;
+}
+
+Java main():
+--------------
+import java.util.Random;
+public class MainClass{
+	private static int x=10;
+	private int y;
+  //public static void main(String args[]) {
+  public static void main(String[] args) {
+	System.out.print("Hello World");
+	System.out.print(x);	//ok, x is static field, main is also static method
+	//System.out.print(y);	//Error, y is NON-static field, but main is static method
+	for(int i=0; i<args.length; i++) cout<<s[i];
+  }
+}
+
+class Test{
+	private:	//c++
+		int x,y;
+	//
+	public:
+		int z;
+	///	void doSome(){...}
+	//
+};
+
+class Test{		//java
+	private int x,y;
+	private static String uniName = "IUB";
+	public z;
+	public void doSome(){...}
+};
+
+
+----------------------------
+
+
+- <<	vs	System.out.print()
+
+
+
+Differences between C++ & Java main:
+------------------------------------
+
+- static field in java
+	: if all instances of a class have their own memory for a field, 
+		we call it instance-level/non-static field. Ex: id, name, cgpa for class Student
+		Therefore, the cliend must be an instance to represent the field
+			Student asif;
+			asif.id; luna.id;
+
+	: if all instances of a class share a single piece of memory to represent common value 
+		of the field, then we call it class-level/static field. Ex: uniName for class Student
+		For realistic reason memory of the static field will be associated in class space,
+		Therefore, the cliend must be the class name to represent the static field 
+			Student asif,luna;
+			Student.uniName;
+
+- static field in java
+	: static method can access ONLY static field;
+	: static method does not need an instance(object) as its client. Instead class name will
+		be the client [if a static method needs to be called]
+
+
+- C++ main returns int, java main returns void
+	: C++ main can also return void (in earlier versions)
+	: recent version of C++ requires main to return int
+
+- C++ main is global, java main is a method(member function)
+	: Java is pure-OOP language, and therefore everything is part of some class.
+	: as a result, main is also a method of some class
+
+- No parameter in C++ main, in Java String array is parameter
+	: If programmer wants, c++ main can also have parameters as command line argument
+	  c:\Programs\Test.exe ColorTheme Theme1 colorCode 12
+
+- In java main, the array size is not provided
+	: In java, every array is a class
+	   int[] arr;	      //arr is a class instance, class int[]{...}	  //implicit class
+   	   Student asif;      //asif is a class instance, class Student{...}	  //explicit class
+	   Student[] studArr  //studArr is a class instance, class Student[]{...} //implicit class
+	   Student[][] stud2D;//stud2D is a class instance, class Student[][]{...} //implicit class
+	   int[][] tDArr;     //tDArr is a class instance, class int[][]{...} //implicit class
+	class int[]{
+		public int length;	
+	}
+
+- C++: "string", Java: "String"
+
+- In java array, "[]" is augmented with type, rather than with arrayName
+
+- operator<< vs System.out.print() method
+	int x;
+	cout<<x;	cout.operator<<(x);	
+
+			System.out.print(x);
+			method name: print(); 
+			Q: method of which class?
+			A: class whose object is 'out'
+
+			//Employee.empAddress.getZipCode();
+			e1.empAddress.getZipCode();
+			
+
+
+- global function in C++, public method in Java
+- not declared as static in C++, declared as static in Java
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

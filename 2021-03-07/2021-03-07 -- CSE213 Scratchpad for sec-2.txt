@@ -1,0 +1,164 @@
+2021-03-07 -- CSE213 Scratchpad for sec-2
+==========================================
+Practice Problem Q4:
+
+
+int * ptr;
+
+void doSome(int*& p){
+	p = new int [10];
+	loop: p[i];
+}
+
+void doSome(ptr);
+
+
+void allocateMemory(Course*& courseArr, int n){
+
+}
+
+
+====================================================================
+Introduction to Java:
+
+continuation after last class's discussion:			
+
+
+- Bytecode, also known as class file
+- 
+
+===============================================================================
+//myMath.cpp
+class Polygon{
+
+
+};
+//after compilation, we will get myMath.o (object file)
+
+
+//test.cpp
+#include "myMath.cpp"
+class A{
+	//fields and methods
+};
+
+class B{
+	//fields and methods
+};
+
+void doSome(){...}
+
+int main(){
+
+
+}
+
+//after compilation, we will get a single machine code file (object file: test.o / test.obj)
+
+-------------------------------------------------------------------
+test.java	//invalid java file name
+
+SomeClass.java	//java file name must be same as public class name
+
+class Student{	//package class
+
+	fields & methods
+	int x;	//package scope
+	private int y;
+	public int z;
+	protected int w;
+
+	void doSome(){...}	//package method
+	public void doAnother(){...}	//public method
+
+}
+
+public class SomeClass{	//public class
+	p s v main(...){
+
+	}
+}
+
+//after compilation, we will get a number of machine code files (bytcode / classfile: test.class)
+//Student.class & SomeClass.class
+//they must co-exist (we can ensure by keeping them in same folder).
+//Therefore, this FOLDER is a scope in java, a.k.a 'package' scope
+
+
+In c++, every member of a class is "private" by default
+
+In Java, 
+	- every member of a class is "package" by default
+	- every class is also "package" by default
+
+
+d:\CSE213\utilities
+	class MyMath{...}
+		MyMath.java -->	MyMath.class
+
+	public class MyCalculator{
+		
+		void calculateSome(){
+			MyMath m = ...;
+			m.someMethodOfMyMath();
+		}
+	}
+
+
+d:\CSE213\sec2
+	import ......MyCalculator;
+	public class MainClass{
+		p s v main(...){
+			MyMath m = ...;		//can't import non-public class from another package
+			MyCalculator mc = ....;	//Ok, if we import the public class from d:\CSE213\utilities package
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

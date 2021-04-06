@@ -1,0 +1,233 @@
+2021-03-16 -- CSE213 Scratchpad for sec-2
+==========================================
+
+Aggregation:
+============
+The new class being-defined establishes 'has-a' relationship with a pre-existing-class,
+by having a class-handle/object of pre-existing class as its field
+
+Inheritance: Extension of a class:
+==================================
+
+super/parent/base class				sub/child/derived/inherited class 
+----------------------- 			--------------------------------
+//class Person{}	---extends to---> 	class Computer{}	//Not acceptable logically
+class Person{}		---extends to---> 	class Student{}		//OK
+class Person{}		---extends to---> 	class Employee{}	//OK
+
+- super-class establishes 'is-a' relationship with sub-class
+- sub-class inherits ALL MEMBERS of super-class as its own member
+
+
+
+public class Person{
+	name, dob, gender, bg, height, weight, nationality
+	//all instances must have these fields
+	
+	address, phoneNo, profession, email, religion, 
+	//not necessarily every instance will have value for above fields
+}
+
+public class Person{
+	private String name, dob, gender, bg, nationality; 
+	private float height, weight; 
+	//public getters, setters & constructors
+	public void showPersonInfo(){...}
+}
+
+
+public class Employee extends Person{
+	private int id; 
+	private String desig, dept;
+	private float salary;
+	public void doSome(){...}
+}
+
+===============================
+
+- abstract class
+- interface
+- polymorphism
+
+===============================
+
+- Abstract class: an abstract class is a class whose, class-handles CAN'T be instanciated
+
+-----------------------------------	
+public abstract class Vehicle{
+	public void doSome(){
+		//code to ...
+	}
+}
+
+public class MotorCycle extends Vehicle{
+
+	public void start(){	
+		//code to start a MotorCycle
+	}
+}
+
+public class Car extends Vehicle{
+	public void startCar(){	
+		//code to start a Car
+	}
+}
+----------------------------------
+
+public abstract class Vehicle{
+	//Since start is implemented in superclass, 
+	//overriding start() is optional for the subclasses
+
+	public void start(){
+		//code to start a vehicle
+	}
+}
+public class Rickshaw extends Vehicle{
+	
+	if Rickshaw choose not to override
+}
+public class MotorCycle extends Vehicle{	
+	//@Override
+	public void start(){	
+		//code to start a MotorCycle
+	}
+}
+public class Car extends Vehicle{
+	//@Override
+	public void start(){	
+		//code to start a Car
+	}
+}
+
+class MainClass{
+  p s v main(...){
+	MotorCycle m1 = new MotorCycle();
+	Car c1 = new Car();
+
+	//m1.start();
+	//c1.startCar();
+  }
+}
+
+
+class MainClass{
+  p s v main(...){
+
+	MotorCycle m1 = new MotorCycle();
+	Car c1 = new Car();
+	Rickshaw r1 = new Rickshaw();
+
+	m1.start();
+	c1.start();
+	r1.start();
+  }
+}
+
+
+- In method overloading, multiple defitions are defined within SAME class with unique parameter-list,
+	The compiler is not confused, and
+	*** All definitions are ready for execution using same instances
+	asif.doSome();
+	asif.doSome(10);
+	asif.doSome(2,5);
+
+- In method overriding, multiple defitions with same parameter-list is defned in super & sub classes.
+	The compiler is highly CONFUSED confused to choose a definition.
+	- either the program will not be compiled
+	- one of them (inherited one) should be deactivated internally for the subclass 
+	*** ONLY ONE definition is ready for execution using same instance of subclass
+		
+	All definitions are ready to be called using same client-instance
+	asif.doSome();
+	asif.doSome(10);
+	asif.doSome(2,5);
+
+
+----------------------------------
+
+public abstract class Vehicle{
+	//Since start is an abstract method 
+	//overriding start() is mandatory for the subclasses
+
+	public void start();
+}
+public class Rickshaw extends Vehicle{
+	//@Override
+	public void start(){	
+		//code to start a MotorCycle
+	}
+}
+public class MotorCycle extends Vehicle{	
+	//@Override
+	public void start(){	
+		//code to start a MotorCycle
+	}
+}
+public class Car extends Vehicle{
+	//@Override
+	public void start(){	
+		//code to start a Car
+	}
+}
+
+class MainClass{
+  p s v main(...){
+	MotorCycle m1 = new MotorCycle();
+	Car c1 = new Car();
+
+	//m1.start();
+	//c1.startCar();
+  }
+}
+
+
+class MainClass{
+  p s v main(...){
+
+	MotorCycle m1 = new MotorCycle();
+	Car c1 = new Car();
+	Rickshaw r1 = new Rickshaw();
+
+	m1.start();
+	c1.start();
+	r1.start();
+  }
+}
+
+------------------------------------------------
+
+public abstract class Vehicle{
+	// doSome();
+	public abstract void start();
+}
+
+public class MotorCycle extends Vehicle{	
+	@Override
+	public void start(){	
+		//code to start a MotorCycle
+	}
+}
+public class Car extends Vehicle{
+	@Override
+	public void start(){	
+	//public void startCar(){	
+		//code to start a Car
+	}
+}
+
+class MainClass{
+  p s v main(...){
+	//MotorCycle m1 = new MotorCycle();
+	//Car c1 = new Car();
+	//m1.start();	c1.startCar();
+
+	Vehicle v1,v2;
+	v1 = new MotorCycle();
+	v2 = new Car();
+	
+	//v1.start();	v2.srartCar();
+	v1.start();	v2.srart();
+  }
+}
+
+

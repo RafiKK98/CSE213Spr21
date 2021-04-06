@@ -1,0 +1,28 @@
+2021-03-14 -- CSE213 Scratchpad for sec-2
+==========================================
+
+C++:
+int arr1[5];
+ - arr1 is a 1-D array of 5 elements, whose elements are ints.
+
+int arr2[2][3];
+ - arr2 is a 2-D array of 6 elements, whose elements are ints.	[user's perception]
+ - arr2 is a 1-D array of 2 elements, whose elements are 1-D int array of 3 elements (ints).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

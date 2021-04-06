@@ -1,0 +1,149 @@
+2021-03-21 -- CSE213 Scratchpad for sec-2
+==========================================
+
+- Polymorphism
+- Multiple inheritance
+- Interface
+
+- Project MS-1
+
+
+-----------------------------------------------------------------
+
+class Granade{
+
+
+}
+
+
+public class MainClass{
+  p s v main(...){
+	//Granade[] gArr = new Granade[10];
+
+	//ArrayList<Sword> sList = new 	ArrayList<Sword>();
+	//ArrayList<Pistol> pList = new ArrayList<Pistol>();
+	//ArrayList<Granade> gList = new ArrayList<Granade>();
+
+	ArrayList<Weapon> wList = new ArrayList<Weapon>();	//collection of Weapon handle
+
+
+  }
+
+
+
+------------------
+
+public class IntStacK{		//collection class, but NOT generic
+	int[] vals;
+	IntStack(){ vals = new int[10]; }
+}
+
+public class FloatStacK{	//collection class, but NOT generic
+	float[] vals;
+	IntStack(){ vals = new float[10]; }
+}
+
+public class MyStacK{	//collection class, as well as GENERIC
+	private T[] vals;
+	public IntStack(){ vals = new T[10]; }
+	public void push(T x){
+		//code to push x into vals
+	}
+}
+
+public class MainClass{
+  p s v main(...){
+	MyStack<int> stk1 = new MyStack<int>();
+	MyStack<String> stk2 = new MyStack<String>();
+  }
+
+
+------------------------------------
+case 4:
+	int i;
+	for(i=0;i<wList.size();i++){
+		wList.get(i).overhaul();
+	}
+
+for(Weapon w: wList){
+	w.overhaul();
+}
+==========================================================
+
+for(loopVariableInitialValue; terminatingCondition; wayToChangeLopVariableValye){
+	//you can use normal for loop to asscees elements of a collection using index
+	//you can ALSO normal for loop just to iterate the loop block ONLY. Ex: printing  1 to 100
+}
+
+Advance for loop: is allowed to be used with a COLLECTION ONLY
+
+for(TypeOfCollectionElement dummyElementName: collectionName){
+	//every iteration you will keep getting an element of the collection
+}
+
+int[] arr = new int[10];
+for(int x: arr){
+	sout(x);
+}
+
+ArrayList<Weapon> wList;
+for(Weapon w: wList){
+	w.overhaul();
+}
+
+==============================================
+===========================================================================================
+IRAS:
+
+User-1: Faculty
+  Goal-1: Submit grade for a course taken in current semester
+  Goal-2: Take attendance for the class
+  Goal-3: Give assignments to students
+  Goal-4: ...
+User-2: Student
+  Goal-1: Register Course for upcoming semester
+	Workflow (sequence of background as well as user-initiated events)
+	e-1: user must login as 'Student'. If login is successful, 
+		homeScene of that user will be loaded
+		else, ......
+	e-2: choose 'register course' option. It will:
+		- validate date, time, creditsCompleted, facultyEvStatus, 
+			probationStatus, docsPending,... of the student
+		- if validation is successfull, list of offeredcourses applicable to the 
+			student will be loaded
+		  else,.....
+	e-3: select courses one-course at a time. While adding a course need to check:
+		- time clash with already selected courses
+		- capacity overflow
+		- prerequisite done
+		- If retake, rekate policy compliance
+		- ...
+
+	e-4: Proceed for registration. Need to check:
+		- Once again check capacity for ALL selected course
+		- Minimum & Maximum credit range
+		- If paired course, Course+Lab both are selected, 
+			or one is completed and the other is retake
+		- Minimum foundation requirement is fulfilled or not
+		- ....
+		- if fails,.....
+		
+	e-5: Commit to database & generate bill
+
+  Goal-2: Evaluating Faculty 
+  Goal-3: Pay tuition fees
+  Goal-4: Add/deop...
+  Goal-5: .....
+
+
+User-3: AdmissionOfficer
+
+User-4: CitsOfficer
+
+User-5: RegOfficeOfficer
+
+
+
+
+
+
